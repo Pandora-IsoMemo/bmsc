@@ -1,7 +1,6 @@
-# MPI-constraint-estimation (BMSC)
+# constraint-estimation (BMSC)
 
 ## Installation on local machine:
 - consider requirements.txt 
 - in R-studio, install.packages('rstan') may be used
 - Access beta version: https://isomemoapp.com/app/constraint-estimation-app-beta
-# constraint-estimation
