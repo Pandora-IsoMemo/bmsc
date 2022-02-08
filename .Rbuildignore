@@ -1,0 +1,7 @@
+^.+\.Rproj$
+^\.Rproj\.user$
+^libWin$
+^libLinux$
+^RScripts$
+^src/.+\.so$
+^src/.+\.o$

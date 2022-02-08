@@ -1,0 +1,5 @@
+.git
+lib*
+.Rprofile
+src/*.so
+src/*.o
