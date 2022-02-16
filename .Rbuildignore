@@ -5,3 +5,4 @@
 ^RScripts$
 ^src/.+\.so$
 ^src/.+\.o$
+^LICENSE\.md$
