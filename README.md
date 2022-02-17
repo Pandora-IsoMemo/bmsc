@@ -1,4 +1,4 @@
-# constraint-estimation (BMSC)
+# BMSC (former constraint-estimation)
 
 ## Installation on local machine:
 - consider requirements.txt 
