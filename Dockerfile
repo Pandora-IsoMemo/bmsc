@@ -1,4 +1,6 @@
-FROM bmsc-base:latest
+FROM ghcr.io/pandora-isomemo/base-image:latest
+
+RUN installPackage pkgbuild
 
 ADD . .
 

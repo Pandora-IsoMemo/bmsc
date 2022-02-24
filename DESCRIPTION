@@ -10,7 +10,7 @@ Description: A Bayesian regression package supporting constrained coefficient es
      variable selection using Stan. This includes a robust variable selection
     algorithm by a horseshoe prior  (<doi:10.1093/biomet/asq017>) that finds the optimal model considering main effects,
     interactions as well as powers of given variables under potential parameter constraints.
-Depends: R (>= 3.4.0), Rcpp (>= 1.0.0), methods
+Depends: R (>= 3.5.0), Rcpp (>= 1.0.0), methods
 Imports: dplyr (>= 0.7.4), ggplot2 (>= 2.2.1), loo (>= 2.0.0), rstan (>= 2.21.2),
           rstantools (>= 2.1.1), R.utils (>= 2.6.0), pROC
 License: GPL (>= 3)
