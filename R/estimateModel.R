@@ -7,6 +7,8 @@
 #' @param categorical character vector: categorical variables
 #' @param maxExponent positive integer: highest exponent included in the
 #' formula. Default is 1, e.g., only linear effects.
+#' @param inverseExponent positive integer: highest inverse exponent included in the
+#' formula. Default is 1, e.g., only linear effects.
 #' @param interactionDepth positive integer: maximum order of interaction.
 #' Default is 1, e.g., only main effects (no interactions).
 #' @param intercept logical: Should the intercept be included in the estimation or not?
@@ -22,6 +24,8 @@
 #' @param scale logical: should the variables be scaled to mean 0 and sd 1?
 #' @param chains positive integer: number of chains for MCMC sampling
 #' @param iterations positive integer: number of iterations per chain for MCMC sampling
+#' @param shiny used for shiny?
+#' @param imputeMissings boolean: impute missings by pmm method in mice package?
 #' @return A list of potential models
 #' @examples
 #' \dontrun{
@@ -53,6 +57,7 @@ constrSelEst <- function(formula,
                          mustExclude = "",
                          categorical = "",
                          maxExponent = 1,
+                         inverseExponent = 1,
                          interactionDepth = 1,
                          intercept = TRUE,
                          constraint_1 = FALSE,
@@ -66,11 +71,12 @@ constrSelEst <- function(formula,
                          chains = 4,
                          burnin = 300,
                          iterations = 500,
-                         shiny = FALSE) {
+                         shiny = FALSE,
+                         imputeMissings = FALSE) {
   if(constraint_1){
     scale <- FALSE
   }
-  withoutMissings <- handleMissingData(data, formula, yUncertainty)
+  withoutMissings <- handleMissingData(data, formula, yUncertainty, imputeMissings, categorical)
   data <- withoutMissings$data
   if(categorical[1] != ""){
     data[, categorical] <- lapply(1:length(categorical), function(x) as.character(data[, categorical[x]]))
@@ -83,6 +89,7 @@ constrSelEst <- function(formula,
                               mustExclude = mustExclude,
                               categorical = categorical,
                               maxExponent = maxExponent,
+                              inverseExponent = inverseExponent,
                               interactionDepth = interactionDepth,
                               intercept = intercept,
                               constraint_1 = constraint_1,
@@ -118,10 +125,10 @@ constrSelEst <- function(formula,
   return(list(models = models, variableData = variableData))
 }
 
-
 selectModel <- function(formula,
                         data,
                         maxExponent,
+                        inverseExponent,
                         interactionDepth,
                         intercept,
                         constraint_1,
@@ -140,7 +147,7 @@ selectModel <- function(formula,
   if (any(yUncertainty < 0))
     stop("uncertainties in y must be larger or equal 0")
   data$yUncertainty <- yUncertainty
-  regFormula <- createFormula(formula, maxExponent, interactionDepth, intercept, categorical, mustExclude)
+  regFormula <- createFormula(formula, maxExponent,inverseExponent, interactionDepth, intercept, categorical, mustExclude)
   mustIncludeFormula <- paste(paste(all.vars(regFormula)[1], "~",
                                     paste(mustInclude, collapse = "+")), "- 1")
   modelCompiled <-
