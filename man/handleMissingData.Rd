@@ -4,7 +4,7 @@
 \alias{handleMissingData}
 \title{Exclude rows with missing values}
 \usage{
-handleMissingData(data, formula, yUncertainty)
+handleMissingData(data, formula, yUncertainty, imputeMissings, categorical)
 }
 \arguments{
 \item{data}{data.frame}
@@ -12,6 +12,10 @@ handleMissingData(data, formula, yUncertainty)
 \item{formula}{formula object}
 
 \item{yUncertainty}{numeric: vector}
+
+\item{imputeMissings}{boolean: impute missings}
+
+\item{categorical}{character: categorical vars}
 }
 \value{
 A list with the elements "data" (data frame containing only the

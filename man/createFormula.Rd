@@ -7,6 +7,7 @@
 createFormula(
   formula,
   maxExponent = 1,
+  inverseExponent = 1,
   interactionDepth = 1,
   intercept = TRUE,
   categorical = "",
@@ -19,6 +20,9 @@ interactions. If \code{formula} is not of class \code{formula}, it is turned
 into one.}
 
 \item{maxExponent}{positive integer: highest exponent included in the
+formula. Default is 1, e.g., only linear effects.}
+
+\item{inverseExponent}{positive integer: highest inverse exponent included in the
 formula. Default is 1, e.g., only linear effects.}
 
 \item{interactionDepth}{positive integer: maximum order of interaction.

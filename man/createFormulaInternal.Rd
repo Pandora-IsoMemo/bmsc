@@ -9,6 +9,7 @@ createFormulaInternal(
   formula,
   allVars,
   maxExponent,
+  inverseExponent,
   interactionDepth,
   intercept,
   categorical,
@@ -21,6 +22,8 @@ createFormulaInternal(
 \item{allVars}{object returned by \code{\link[base]{all.vars}}}
 
 \item{maxExponent}{positive integer}
+
+\item{inverseExponent}{positive integer}
 
 \item{interactionDepth}{positive integer}
 

@@ -1,6 +1,6 @@
 Package: BMSC
 Title: Bayesian Model Selection under Constraints
-Version: 22.02.1
+Version: 22.11.1
 Authors@R: c(
     person("Marcus", "Groß", email = "marcus.gross@inwt-statistics.de", role = c("aut", "cre")),
     person("Ricardo", "Fernandes", email = "ldv1452@gmail.com", role = c("aut")),
@@ -19,4 +19,4 @@ LazyData: true
 LinkingTo: StanHeaders (>= 2.21.0-7), rstan (>= 2.21.2), BH (>= 1.72.0), Rcpp (>=
     1.0.0), RcppEigen (>= 0.3.3.3.0)
 Suggests: lintr, testthat
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2

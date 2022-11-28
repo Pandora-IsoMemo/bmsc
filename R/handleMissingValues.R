@@ -17,7 +17,7 @@ handleMissingData <- function(data, formula, yUncertainty, imputeMissings, categ
   numeric_vars <- all_vars[!(all_vars %in% categorical)]
   relevantData <- data[, names(data) %in% all_vars, drop = FALSE]
   
-  if(imputeMissing & any(is.na(relevantData))){
+  if(imputeMissings & any(is.na(relevantData))){
     if(categorical != ""){
       for(i in categorical){
         if(class(relevantData[, i]) == "character"){
@@ -33,7 +33,7 @@ handleMissingData <- function(data, formula, yUncertainty, imputeMissings, categ
         new_data[, numeric_vars[i]] = rowMeans(sapply(1:length(completed), function(x) completed[[x]][,numeric_vars[i]]))
       }
     }
-    if(category != ""){
+    if(categorical != ""){
       for (j in 1:length(categorical)){
         new_data[, j] <- apply(sapply(1:length(completed), function(x) completed[[x]][,j]), 1, getMode)
       }
