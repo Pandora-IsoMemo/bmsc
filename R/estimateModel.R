@@ -79,7 +79,8 @@ constrSelEst <- function(formula,
   withoutMissings <- handleMissingData(data, formula, yUncertainty, imputeMissings, categorical)
   data <- withoutMissings$data
   if(categorical[1] != ""){
-    data[, categorical] <- lapply(1:length(categorical), function(x) as.character(data[, categorical[x]]))
+    data[, categorical] <- lapply(1:length(categorical),
+                                  function(x) gsub(" ", "_", as.character(data[, categorical[x]]), fixed = TRUE))
   }
   yUncertainty <- withoutMissings$yUncertainty
   
