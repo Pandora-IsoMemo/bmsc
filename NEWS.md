@@ -3,11 +3,13 @@
 ## BMSC version 22.12.1
 
 ### New Features
-- _Did you add a new feature? Can you add what is new?_
+- _Add inverse exponents as features. Now one can add x^-1, x^-2,.. as potential modelling features_
+- _Model averaging added. Now models can be averaged by a criterion (AIC, AICc, WAIC, logLik, BIC and Loo)_
+- _Imputation of missing values added (multiple imputation via the mice package)_
 
 ### Updates
-- _Did you update existing features? Can you add what is new?_
+- _---_
   
 ### Bug Fixes
-- _Did you fix bugs? Can you add what was fixed?_
+- _---_
   

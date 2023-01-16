@@ -29,8 +29,12 @@ get_model_weights <- function(fits, measure = "Loo"){
     measures <- fits$BIC
   }
   
-  weights <- exp(-0.5 * (measures - min(measures)))
-  return(weights/sum(weights))
+  if(exists("measures")){
+    weights <- exp(-0.5 * (measures - min(measures)))
+    return(weights/sum(weights))
+  } else {
+    return(NULL)
+  }
 }
 
 #' Compute model average
@@ -94,4 +98,5 @@ get_avg_model <- function(models_input, weights){
           a[(1 + (j-1) * (iter-burnin)): ((j) * (iter-burnin))]
     }
   }
+  return(avg_model)
 }

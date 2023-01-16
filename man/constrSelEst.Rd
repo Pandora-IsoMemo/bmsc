@@ -103,8 +103,8 @@ models <- constrSelEst(y ~ x1 + x2 + x3, mustInclude = "x1", maxExponent = 3,
                        yUncertainty = yUncertainty,
                        xUncertainty = NULL,
                        maxNumTerms = 10)
-plotModelFit(models)
-bestModel <- getBestModel(models, thresholdSE = 2)
+plotModelFit(models$models)
+bestModel <- getBestModel(models$models, thresholdSE = 2)
 print(bestModel)
 }
 }
