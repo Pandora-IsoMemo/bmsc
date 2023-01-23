@@ -33,11 +33,11 @@ modelsNoInt <- constrSelEst(formula = y ~ x1 + x2,
 
 test_that("predict just works", {
   
-  pred <- predict(object = models[[2]], newdata = datNew)
+  pred <- predict(object = models$models[[2]], newdata = datNew)
   expect_is(pred, "numeric")
   expect_length(pred, nrow(datNew))
   
-  pred <- predict(object = modelsNoInt[[4]], newdata = dat)
+  pred <- predict(object = modelsNoInt$models[[4]], newdata = dat)
   expect_is(pred, "numeric")
   expect_length(pred, nrow(dat))
   
@@ -47,34 +47,34 @@ test_that("predict just works", {
 test_that("Dependent variable in newdata is ignored", {
   datNewWithDep <- datNew
   datNewWithDep$y <- rnorm(30)
-  expect_equal(predict(object = models[[2]], newdata = datNew),
-               predict(object = models[[2]], newdata = datNewWithDep))
+  expect_equal(predict(object = models$models[[2]], newdata = datNew),
+               predict(object = models$models[[2]], newdata = datNewWithDep))
 })
 
 
 test_that("predict inserts NA values at correct positions", {
   
-  pred <- predict(object = models[[length(models)]], newdata = datNewMis)
-  expect_true(all_equal(which(apply(datNewMis, 1, function(x) any(is.na(x)))),
+  pred <- predict(object = models$models[[length(models)]], newdata = datNewMis)
+  expect_true(all.equal(which(apply(datNewMis, 1, function(x) any(is.na(x)))),
                         which(is.na(pred))))
   
-  pred <- predict(object = modelsNoInt[[length(models)]], newdata = datNewMis)
-  expect_true(all_equal(which(apply(datNewMis, 1, function(x) any(is.na(x)))),
+  pred <- predict(object = modelsNoInt$models[[length(models)]], newdata = datNewMis)
+  expect_true(all.equal(which(apply(datNewMis, 1, function(x) any(is.na(x)))),
                         which(is.na(pred))))
   
-  pred <- predict(object = modelsNoInt[[2]], newdata = datNewMis)
-  expect_true(all_equal(which(apply(datNewMis, 1, function(x) any(is.na(x)))),
+  pred <- predict(object = modelsNoInt$models[[2]], newdata = datNewMis)
+  expect_true(all.equal(which(apply(datNewMis, 1, function(x) any(is.na(x)))),
                         which(is.na(pred))))
 })
 
 
 test_that("predict inserts NA values at correct positions (not all variables in model)", {
   
-  pred <- predict(object = models[[1]], newdata = datNewMis)
-  expect_true(all_equal(which(apply(datNewMis[, "x2", drop = FALSE], 1, function(x) any(is.na(x)))),
+  pred <- predict(object = models$models[[1]], newdata = datNewMis)
+  expect_true(all.equal(which(apply(datNewMis[, "x2", drop = FALSE], 1, function(x) any(is.na(x)))),
                         which(is.na(pred))))
   
-  pred <- predict(object = modelsNoInt[[1]], newdata = datNewMis)
-  expect_true(all_equal(which(apply(datNewMis[, "x2", drop = FALSE], 1, function(x) any(is.na(x)))),
+  pred <- predict(object = modelsNoInt$models[[1]], newdata = datNewMis)
+  expect_true(all.equal(which(apply(datNewMis[, "x2", drop = FALSE], 1, function(x) any(is.na(x)))),
                         which(is.na(pred))))
 })

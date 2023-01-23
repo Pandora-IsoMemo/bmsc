@@ -11,7 +11,7 @@
 #' @param categorical character: categorical vars
 #' @return A list with the elements "data" (data frame containing only the
 #' relevant variables and complete rows) and "yUncertainty".
-handleMissingData <- function(data, formula, yUncertainty, imputeMissings, categorical) {
+handleMissingData <- function(data, formula, yUncertainty, imputeMissings = FALSE, categorical = "") {
   
   all_vars <- all.vars(formula)
   numeric_vars <- all_vars[!(all_vars %in% categorical)]

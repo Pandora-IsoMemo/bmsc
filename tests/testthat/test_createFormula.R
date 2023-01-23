@@ -18,8 +18,8 @@ test_that("createFormula returns correct input - no or only intercept", {
   input4 <- "dep ~ x1 + x2 - 1" # No intercept
   expect_equal(createFormula(input1), input1)
   expect_equal(createFormula(input2, 2, 1), as.formula("dep ~ x1 + I(x1^2) - 1"))
-  expect_equal(createFormula(input3, 1, 2), as.formula("dep ~ x1 - 1"))
-  expect_equal(createFormula(input4, 2, 3),
+  expect_equal(createFormula(input3, 1, 1, 2), as.formula("dep ~ x1 - 1"))
+  expect_equal(createFormula(input4, 2, 1, 3),
                as.formula(paste0("dep ~ x1 + x2 + I(x1^2) + I(x2^2) + x1:x2 + ",
                                  "I(x2^2):x1 + I(x1^2):x2 + I(x1^2):I(x2^2) ",
                                  "- 1")))
