@@ -50,6 +50,16 @@ test_that("A message is returned if some rows are missing", {
   expect_error(BMSC:::handleMissingData(data, formula, yUncertainty)$data, NA)
 })
 
+test_that("Test if imputation works", {
+  posMisX1 <- sample(1:nrow(data), 5)
+  posMisX3 <- sample(1:nrow(data), 3)
+  
+  data$x1[posMisX1] <- NA
+  data$x3[posMisX3] <- NA
+  
+  dataImp <- BMSC:::handleMissingData(data, formula, yUncertainty, imputeMissings = TRUE)$data
+  expect_equal(sum(is.na(dataImp)), 0)
+})
 
 test_that("An error occures if there is no complete row in the data", {
   data$x2 <- NA

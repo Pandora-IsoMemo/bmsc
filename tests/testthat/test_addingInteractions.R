@@ -62,3 +62,4 @@ test_that("makeInteractions", {
                  "one_more:x_1:x_2")))
   expect_equal(makeInteractions(vars3, 3), makeInteractions(vars3, 4))
 })
+

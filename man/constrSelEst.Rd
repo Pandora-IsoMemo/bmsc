@@ -11,6 +11,7 @@ constrSelEst(
   mustExclude = "",
   categorical = "",
   maxExponent = 1,
+  inverseExponent = 1,
   interactionDepth = 1,
   intercept = TRUE,
   constraint_1 = FALSE,
@@ -24,7 +25,8 @@ constrSelEst(
   chains = 4,
   burnin = 300,
   iterations = 500,
-  shiny = FALSE
+  shiny = FALSE,
+  imputeMissings = FALSE
 )
 }
 \arguments{
@@ -41,6 +43,9 @@ into one.}
 \item{categorical}{character vector: categorical variables}
 
 \item{maxExponent}{positive integer: highest exponent included in the
+formula. Default is 1, e.g., only linear effects.}
+
+\item{inverseExponent}{positive integer: highest inverse exponent included in the
 formula. Default is 1, e.g., only linear effects.}
 
 \item{interactionDepth}{positive integer: maximum order of interaction.
@@ -68,6 +73,10 @@ given in standard deviations}
 \item{chains}{positive integer: number of chains for MCMC sampling}
 
 \item{iterations}{positive integer: number of iterations per chain for MCMC sampling}
+
+\item{shiny}{used for shiny?}
+
+\item{imputeMissings}{boolean: impute missings by pmm method in mice package?}
 }
 \value{
 A list of potential models
@@ -94,8 +103,8 @@ models <- constrSelEst(y ~ x1 + x2 + x3, mustInclude = "x1", maxExponent = 3,
                        yUncertainty = yUncertainty,
                        xUncertainty = NULL,
                        maxNumTerms = 10)
-plotModelFit(models)
-bestModel <- getBestModel(models, thresholdSE = 2)
+plotModelFit(models$models)
+bestModel <- getBestModel(models$models, thresholdSE = 2)
 print(bestModel)
 }
 }

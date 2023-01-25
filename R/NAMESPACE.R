@@ -3,6 +3,7 @@
 #' @aliases BMSC
 #' @useDynLib BMSC, .registration = TRUE
 #' @importFrom loo loo_compare extract_log_lik loo relative_eff waic
+#' @importFrom mice mice complete
 #' @importFrom Rcpp loadModule
 #' @importFrom pROC roc
 #' @importFrom dplyr %>% all_equal filter mutate_all n_distinct summarise rename group_by arrange desc

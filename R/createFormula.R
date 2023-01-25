@@ -10,6 +10,8 @@
 #' into one.
 #' @param maxExponent positive integer: highest exponent included in the
 #' formula. Default is 1, e.g., only linear effects.
+#' @param inverseExponent positive integer: highest inverse exponent included in the
+#' formula. Default is 1, e.g., only linear effects.
 #' @param interactionDepth positive integer: maximum order of interaction.
 #' Default is 1, e.g., only main effects (no interactions).
 #' @param intercept logical: include intercept or not?
@@ -27,9 +29,10 @@
 #' summary(lm(carFormula, mtcars))
 #' @export
 createFormula <- function(formula, maxExponent = 1,
+                          inverseExponent = 1,
                           interactionDepth = 1, intercept = TRUE,
                           categorical = "", mustExclude = "") {
-  if (maxExponent < 1 | interactionDepth < 1)
+  if (maxExponent < 1 | interactionDepth < 1 | inverseExponent < 1)
     stop("maxExponent and interactionDepth must be positive integers.")
   
   formula <- tryAsFormula(formula)
@@ -43,6 +46,7 @@ createFormula <- function(formula, maxExponent = 1,
     return(formula)
   } else {
     return(createFormulaInternal(formula, allVars, maxExponent,
+                                 inverseExponent,
                                  interactionDepth, intercept,
                                  categorical, mustExclude))
   }
@@ -54,18 +58,20 @@ createFormula <- function(formula, maxExponent = 1,
 #' @param formula formula object
 #' @param allVars object returned by \code{\link[base]{all.vars}}
 #' @param maxExponent positive integer
+#' @param inverseExponent positive integer
 #' @param interactionDepth positive integer
 #' @param intercept boolean
 #' @param categorical character
 #' @param mustExclude character
 createFormulaInternal <- function(formula, allVars, maxExponent,
+                                  inverseExponent,
                                   interactionDepth, intercept,
                                   categorical, mustExclude) {
   polyVars <- allVars[-1]
   if(categorical[1] != ""){
     polyVars <- polyVars[-which(polyVars %in% categorical)]
   }
-  res <- makePoly(polyVars, maxExponent)
+  res <- makePoly(polyVars, maxExponent, inverseExponent)
   if(categorical[1] != ""){
     res <- c(res, unique(categorical))
   }
@@ -100,11 +106,15 @@ tryAsFormula <- function(input) {
 #' but in \code{\link{createFormula}}.
 #' @param vars character: variable names
 #' @param maxExponent integer: highest exponent
+#' @param inverseExponent integer: highest inverse exponent
 #' @return Character vector of \code{length(vars)} times \code{maxExponent}
-#' @examples BMSC:::makePoly(vars = c("x1", "x2"), maxExponent = 3)
-makePoly <- function(vars, maxExponent) {
-  lapply(1:maxExponent, addPowToVars, vars = vars) %>% 
+#' @examples BMSC:::makePoly(vars = c("x1", "x2"), maxExponent = 3, inverseExponent = 2)
+makePoly <- function(vars, maxExponent, inverseExponent) {
+  ret <- lapply(1:maxExponent, addPowToVars, vars = vars) %>% 
     unlist
+  retInv <- lapply(1:inverseExponent, addInvPowToVars, vars = vars) %>% 
+    unlist
+  return(unique(c(ret,retInv)))
 }
 
 
@@ -120,6 +130,17 @@ addPowToVars <- function(vars, power) {
   if (power == 1) vars else paste0("I(", vars, "^", power, ")")
 }
 
+#' Add inverse exponent to a vector of variables
+#' @description Remark: Since this function is to be used only within
+#' \code{\link{createFormula}}, the validity of the input is not checked here
+#' but in \code{\link{createFormula}}.
+#' @param vars character: variable names
+#' @param power integer: exponent
+#' @return Vector of same length as \code{vars}
+#' @examples BMSC:::addPowToVars(c("x1", "x2"), 2)
+addInvPowToVars <- function(vars, power) {
+  if (power == 1) vars else paste0("I(", vars, "^", -power, ")")
+}
 
 #' Add all interactions up to a desired order
 #' @details Interactions of variables with themselves (including polynomials
