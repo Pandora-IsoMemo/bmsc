@@ -4,7 +4,13 @@
 \alias{handleMissingData}
 \title{Exclude rows with missing values}
 \usage{
-handleMissingData(data, formula, yUncertainty, imputeMissings, categorical)
+handleMissingData(
+  data,
+  formula,
+  yUncertainty,
+  imputeMissings = FALSE,
+  categorical = ""
+)
 }
 \arguments{
 \item{data}{data.frame}
