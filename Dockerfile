@@ -2,7 +2,7 @@ FROM ghcr.io/pandora-isomemo/base-image:latest
 
 RUN installPackage pkgbuild
 
-RUN Rscript -e "install.packages('https://cran.r-project.org/src/contrib/Archive/mize/mize_0.2.3.tar.gz', repos = NULL)"
+RUN Rscript -e "install.packages('https://cran.r-project.org/src/contrib/Archive/mice/mice_3.14.0.tar.gz', repos = NULL)"
 
 ADD . .
 
