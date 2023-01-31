@@ -6,6 +6,8 @@ RUN Rscript -e "install.packages('https://cran.r-project.org/src/contrib/Archive
 
 ADD . .
 
+RUN installPackage
+
 RUN Rscript -e "pkgbuild::compile_dll(); devtools::document()"
 
 RUN installPackage
