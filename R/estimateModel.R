@@ -495,7 +495,7 @@ getModelFits <- function(models, y = NULL, newdata = NULL){
   loos <- lapply(loos, function(x) x$loos)
   RsqAdj <- sapply(models, function(x) mean(extract(x)$rsq))
   if(!is.null(y) & !is.null(newdata)){
-  Bayes_Rsq <- lapply(models, function(x) bayes_R2_res(x, y, newdata))
+  Bayes_Rsq <- sapply(models, function(x) bayes_R2_res(x, y, newdata))
   MallowsCP <- sapply(models, function(x) sum((y - predict(x, newdata = newdata))^2) / 
                         mean((y - predict(models[[length(models)]], newdata = newdata))^2) - NROW(x@designMatrix)) + 2 * (nParam + 1)
   } else {
