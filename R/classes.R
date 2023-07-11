@@ -29,5 +29,6 @@ ConstrainedLinReg <- setClass("ConstrainedLinReg",
                                            AUC = "numeric",
                                            Rsq = "numeric",
                                            RsqAdj = "numeric",
+                                           Bayes_Rsq = "numeric",
                                            varNames = "character"),
                               contains = "stanfit")
