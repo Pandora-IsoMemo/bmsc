@@ -8,6 +8,16 @@ pipeline {
         GH_TOKEN = credentials("github-isomemo")
     }
     stages {
+        stage('Testing') {
+            steps {
+                sh '''
+                docker build --pull -t tmp-$CUR_PROJ-$TMP_SUFFIX $CUR_PKG_FOLDER
+                docker run --rm --network host tmp-$CUR_PROJ-$TMP_SUFFIX check
+                docker rmi tmp-$CUR_PROJ-$TMP_SUFFIX
+                '''
+          }
+        }
+    
         stage('Deploy R-package') {
             when { branch 'main' }
             steps {
