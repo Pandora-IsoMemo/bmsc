@@ -1,5 +1,9 @@
 # BMSC
 
+## BMSC version 23.07.1
+### New Features
+Bayesian R-squared (follwing https://avehtari.github.io/bayes_R2/bayes_R2.html)
+
 ## BMSC version 23.01.1
 
 ### New Features

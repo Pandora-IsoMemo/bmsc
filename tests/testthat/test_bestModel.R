@@ -59,7 +59,8 @@ test_that("test function bestModel", {
                "BIC",
                "logLik",
                "Rsq",
-               "AUC")) {
+               "AUC",
+               "Bayes_Rsq")) {
     testRes <- bestModel(models$models,
                          fits[[ic]],
                          thresholdSE = 1,

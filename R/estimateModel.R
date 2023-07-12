@@ -450,6 +450,7 @@ estimateBayesianModel <- function(data,
       Loo = as.numeric(NA),
       Rsq = as.numeric(NA),
       RsqAdj = as.numeric(NA),
+      Bayes_Rsq = as.numeric(NA),
       AUC = as.numeric(NA),
       df = as.numeric(NA),
       nagelkerke = as.numeric(NA),
@@ -494,10 +495,12 @@ getModelFits <- function(models, y = NULL, newdata = NULL){
   loos <- lapply(loos, function(x) x$loos)
   RsqAdj <- sapply(models, function(x) mean(extract(x)$rsq))
   if(!is.null(y) & !is.null(newdata)){
+  Bayes_Rsq <- sapply(models, function(x) bayes_R2_res(x, y, newdata))
   MallowsCP <- sapply(models, function(x) sum((y - predict(x, newdata = newdata))^2) / 
                         mean((y - predict(models[[length(models)]], newdata = newdata))^2) - NROW(x@designMatrix)) + 2 * (nParam + 1)
   } else {
     MallowsCP <- rep(NA, length(models))
+    Bayes_Rsq <- rep(NA, length(models))
   }
   if(!is.null(y) & !is.null(newdata) & models[[1]]@type == "logistic"){
   nagelkerke <- sapply(models, function(x){
@@ -522,7 +525,7 @@ getModelFits <- function(models, y = NULL, newdata = NULL){
   }
   return(list(Loo = loos,
               WAIC = WAICs, AIC = AICs, AICc = AICcs, BIC = BICs, MallowsCP = MallowsCP,
-              logLik = avgLiks, RsqAdj = RsqAdj, Rsq = Rsq, AUC = AUC, df = df, nagelkerke = nagelkerke))
+              logLik = avgLiks, RsqAdj = RsqAdj, Rsq = Rsq, Bayes_Rsq = Bayes_Rsq, AUC = AUC, df = df, nagelkerke = nagelkerke))
 }
 
 #' @export
@@ -554,7 +557,7 @@ bestModel <- function(models, loos, thresholdSE, ic){
   if(ic == "logLik"){
     best <- which.max(loos)
   }
-  if(ic %in% c("Rsq", "RsqAdj", "AUC")){
+  if(ic %in% c("Rsq", "RsqAdj", "AUC", "Bayes_Rsq")){
     best <- which.max(loos)
   }
   if(ic %in% c("Loo", "WAIC")){
@@ -602,3 +605,11 @@ getUncertaintyModelMatrix <-
     }
     return(xUncertaintyModelMatrix)
   }
+
+bayes_R2_res <- function(model, y, newdata) {
+  ypred <- t(predict(model, newdata = newdata, samples = TRUE))
+  e <- -1 * sweep(ypred, 2, y)
+  var_ypred <- apply(ypred, 1, var)
+  var_e <- apply(e, 1, var)
+  mean(var_ypred / (var_ypred + var_e))
+}
