@@ -77,7 +77,7 @@ createFormulaInternal <- function(formula, allVars, maxExponent,
   }
   if (interactionDepth > 1) res <- makeInteractions(res, interactionDepth)
   
-  if(!is.null(mustExclude) && mustExclude != ""){
+  if(!is.null(mustExclude) && all(mustExclude != "")){
     res <- res[!(res %in% mustExclude)]
   }
   
