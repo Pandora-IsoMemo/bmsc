@@ -1,4 +1,6 @@
 # BMSC
+## BMSC version 23.07.1.2
+Bugfix: missing categorical data imputation
 
 ## BMSC version 23.07.1
 ### New Features

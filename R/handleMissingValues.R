@@ -34,7 +34,7 @@ handleMissingData <- function(data, formula, yUncertainty, imputeMissings = FALS
       }
     }
     if(categorical != ""){
-      for (j in 1:length(categorical)){
+      for (j in categorical){
         new_data[, j] <- apply(sapply(1:length(completed), function(x) completed[[x]][,j]), 1, getMode)
       }
     }
