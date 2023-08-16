@@ -1,10 +1,14 @@
 # BMSC
+
 ## BMSC version 23.07.1.2
-Bugfix: missing categorical data imputation
+
+### Bugfixes
+- missing categorical data imputation
 
 ## BMSC version 23.07.1
+
 ### New Features
-Bayesian R-squared (follwing https://avehtari.github.io/bayes_R2/bayes_R2.html)
+- Bayesian R-squared (follwing https://avehtari.github.io/bayes_R2/bayes_R2.html)
 
 ## BMSC version 23.01.1
 
