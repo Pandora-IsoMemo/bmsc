@@ -92,7 +92,6 @@ prepPlotData <- function(fits, modelNames, thresholdSE, ic = "Loo") {
 
 
 #' Prepare colour vector
-#' @inheritParams plotModelFit
 #' @param posBestModel numeric: position of best Model
 #' @param length numeric: Length of colour vector
 #' @return Vector of length \code{length}. It contains "black" expect for the
