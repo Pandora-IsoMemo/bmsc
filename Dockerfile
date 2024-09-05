@@ -1,13 +1,19 @@
-FROM ghcr.io/pandora-isomemo/base-image:latest
+FROM inwt/r-shiny:4.3.2
 
-RUN installPackage pkgbuild
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+    && apt-get autoremove -y \
+    && apt-get autoclean -y \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN Rscript -e "install.packages('https://cran.r-project.org/src/contrib/Archive/mice/mice_3.14.0.tar.gz', repos = NULL)"
+RUN installPackage \
+    mice \
+    rstan \
+    rstantools \
+    StanHeaders
 
 ADD . .
 
-RUN installPackage
-
-RUN Rscript -e "pkgbuild::compile_dll(); devtools::document()"
+RUN Rscript -e "rstantools::rstan_config()"
 
 RUN installPackage
