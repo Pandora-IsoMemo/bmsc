@@ -18,5 +18,5 @@ Encoding: UTF-8
 LazyData: true
 LinkingTo: StanHeaders (>= 2.21.0-7), rstan (>= 2.21.2), BH (>= 1.72.0), Rcpp (>=
     1.0.0), RcppEigen (>= 0.3.3.3.0)
-Suggests: lintr, testthat, INWTUtils
+Suggests: lintr, testthat
 RoxygenNote: 7.2.3
