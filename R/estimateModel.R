@@ -24,6 +24,7 @@
 #' @param scale logical: should the variables be scaled to mean 0 and sd 1?
 #' @param chains positive integer: number of chains for MCMC sampling
 #' @param iterations positive integer: number of iterations per chain for MCMC sampling
+#' @param burnin burnin
 #' @param shiny used for shiny?
 #' @param imputeMissings boolean: impute missings by pmm method in mice package?
 #' @return A list of potential models
@@ -214,8 +215,8 @@ selectModel <- function(formula,
     })
     varParts2 <- lapply(varParts2, function(x) paste(x, collapse = ":"))
     variableData$variableCat <- unlist(varParts2)
-    variableData <- variableData %>% group_by(variableCat) %>% summarise(K = mean(K)) %>% 
-      rename(variable = variableCat) %>% arrange(desc(K))
+    variableData <- variableData %>% group_by(.data$variableCat) %>% summarise(K = mean(K)) %>% 
+      rename(variable = .data$variableCat) %>% arrange(desc(K))
   }
   
   return(na.omit(variableData))
@@ -481,6 +482,12 @@ getBestModel <- function(models, thresholdSE = 1, ic = "Loo") {
   return(list(bestModel = models[[bestSparse]]))
 }
 
+#' Get Model Fits
+#' 
+#' @param y response variable
+#' @param newdata data.frame containing all variables that appear in the model formula
+#' @inheritParams getBestModel
+#' 
 #' @export
 getModelFits <- function(models, y = NULL, newdata = NULL){
   loos <- suppressWarnings(lapply(models, getLoo))
@@ -528,6 +535,11 @@ getModelFits <- function(models, y = NULL, newdata = NULL){
               logLik = avgLiks, RsqAdj = RsqAdj, Rsq = Rsq, Bayes_Rsq = Bayes_Rsq, AUC = AUC, df = df, nagelkerke = nagelkerke))
 }
 
+#' Best model
+#' 
+#' @param loos list of model fits
+#' @inheritParams getBestModel
+#'
 #' @export
 bestModel <- function(models, loos, thresholdSE, ic){
   if(ic == "Loo"){

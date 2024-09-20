@@ -72,6 +72,8 @@ given in standard deviations}
 
 \item{chains}{positive integer: number of chains for MCMC sampling}
 
+\item{burnin}{burnin}
+
 \item{iterations}{positive integer: number of iterations per chain for MCMC sampling}
 
 \item{shiny}{used for shiny?}
