@@ -4,6 +4,12 @@
 # a sandbox.
 
 .First <- function() {
+  options(repos = c(
+    getOption('repos'),
+    INWTLab = "https://inwtlab.github.io/drat/",
+    PANDORA = "https://Pandora-IsoMemo.github.io/drat/"
+  ))
+  
   # Check operating system
   if (Sys.info()["sysname"] == "Windows") {
     # Add libWin with the full path to libPaths
@@ -16,3 +22,7 @@
 }
 
 .First()
+
+if (interactive()) {
+  rstantools::rstan_config()
+}
