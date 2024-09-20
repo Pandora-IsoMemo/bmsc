@@ -76,7 +76,7 @@ given in standard deviations}
 
 \item{iterations}{positive integer: number of iterations per chain for MCMC sampling}
 
-\item{shiny}{used for shiny?}
+\item{shiny}{logical: Used for shiny?}
 
 \item{imputeMissings}{boolean: impute missings by pmm method in mice package?}
 }

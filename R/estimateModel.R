@@ -25,7 +25,7 @@
 #' @param chains positive integer: number of chains for MCMC sampling
 #' @param iterations positive integer: number of iterations per chain for MCMC sampling
 #' @param burnin burnin
-#' @param shiny used for shiny?
+#' @param shiny logical: Used for shiny?
 #' @param imputeMissings boolean: impute missings by pmm method in mice package?
 #' @return A list of potential models
 #' @examples
@@ -416,8 +416,8 @@ estimateBayesianModel <- function(data,
                                             control = list(adapt_delta = 0.8,
                                                            max_treedepth = 10)))
   
-  if(shiny){
-    incProgress(1/ nModels / 2.5)
+  if (shiny) {
+    incProgress(1 / nModels / 2.5)
   }
   
   varNames <- colnames(X)
