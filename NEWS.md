@@ -1,7 +1,7 @@
 # BMSC version 24.09.1
 
 ## Bugfixes
-- fix issues with RCMD check
+- fix issues with RCMD check (#8)
 
 # BMSC version 23.07.1.2
 
