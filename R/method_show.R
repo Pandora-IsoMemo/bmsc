@@ -67,17 +67,19 @@ setMethod("show",
 
 #' Print constraint estimation model
 #' @param x model object of class \code{\link{ConstrainedLinReg}}
+#' @param cLevel numeric: desired credible level
+#' @param fit single model fit (return of getModelFits()-function)
 #' @param ... arguments passed from or to other methods
 #' @export
 print.ConstrainedLinReg <- function(x, cLevel = 0.95, fit = NULL,  ...) {
   x@cLevel = cLevel
-  if(!is.null(fit)){
+  if (!is.null(fit)) {
   x@AIC = fit$AIC
   x@BIC = fit$BIC
   x@WAIC = fit$WAIC
   x@Loo = fit$Loo
   }
-  show(x, ...)
+  methods::show(x, ...)
 }
 
 

@@ -46,6 +46,7 @@ setMethod("predict",
 #' to unequal variable length. This column is however not used.
 #' @param formula Model formula
 #' @param newdata data.frame containing all variables that appear in the model
+#' @param catVars categorical variables in the model
 #' @return Object of class \code{\link[stats]{na.exclude}}
 prepDatForPredict <- function(formula, newdata, catVars) {
   if(catVars[1] != ""){

@@ -9,6 +9,10 @@
 \arguments{
 \item{x}{model object of class \code{\link{ConstrainedLinReg}}}
 
+\item{cLevel}{numeric: desired credible level}
+
+\item{fit}{single model fit (return of getModelFits()-function)}
+
 \item{...}{arguments passed from or to other methods}
 }
 \description{

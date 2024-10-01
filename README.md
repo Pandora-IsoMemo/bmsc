@@ -1,6 +1,7 @@
 # BMSC (constraint-estimation)
 
-## Installation on local machine:
-- consider requirements.txt 
-- in R-studio, install.packages('rstan') may be used
-- Access beta version: https://isomemoapp.com/app/osteo-bio-r-beta
+## Local Installation
+
+* to re-generate `R/rstanmodel.R` and the C++ Source Code in src use 
+`rstantools::rstan_config()
+* After that you can install and compile the package e.g. `devtools::load_all()`

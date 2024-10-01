@@ -10,6 +10,8 @@ prepDatForPredict(formula, newdata, catVars)
 \item{formula}{Model formula}
 
 \item{newdata}{data.frame containing all variables that appear in the model}
+
+\item{catVars}{categorical variables in the model}
 }
 \value{
 Object of class \code{\link[stats]{na.exclude}}

@@ -20,7 +20,7 @@ handleMissingData <- function(data, formula, yUncertainty, imputeMissings = FALS
   if(imputeMissings & any(is.na(relevantData))){
     if(categorical != ""){
       for(i in categorical){
-        if(class(relevantData[, i]) == "character"){
+        if (inherits(relevantData[, i], "character")) {
           relevantData[, i] <- factor(relevantData[, i])
         }
       }
