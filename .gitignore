@@ -7,3 +7,4 @@
 # Ensure the 'src' directory itself is tracked by git
 src/*
 !src/
+docs
