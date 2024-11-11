@@ -71,7 +71,7 @@ get_avg_model <- function(models_input, weights){
   })
   #ar
   if(avg_model@ar1){
-    sigma_matrices <- lapply(1:length(models_input), function(x){
+    ar_matrices <- lapply(1:length(models_input), function(x){
       ar_matrix <- extract(models_input[[x]])$ar
     }) 
     a <- ar_matrix[[1]] * weights[1]
