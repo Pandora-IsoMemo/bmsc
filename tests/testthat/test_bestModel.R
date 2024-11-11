@@ -20,7 +20,10 @@ test_that("test function bestModel", {
   yUncertainty <- rexp(n, 10) * 0.01
   data <-
     data.frame(x1, x2, x3, x4 = as.character(x4), y, yUncertainty, x1Unc, x2Unc, x3Unc, x4Unc)
-  
+
+  available_cores <- parallel::detectCores()
+  use_chains <- min(available_cores, 4)
+
   #estimate models
   models <-
     constrSelEst(
@@ -38,7 +41,7 @@ test_that("test function bestModel", {
       #yUncertainty = yUncertainty,
       maxNumTerms = 10,
       scale = T,
-      chains = 4,
+      chains = use_chains,
       iterations = 300
     )
   
