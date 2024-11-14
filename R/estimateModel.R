@@ -486,7 +486,7 @@ getBestModel <- function(models, thresholdSE = 1, ic = "Loo") {
 #' 
 #' @param y response variable
 #' @param newdata data.frame containing all variables that appear in the model formula
-#' @param cores number of cores to use, see \code{\link{getLoo}}
+#' @param cores number of cores to use, compare \code{\link[loo]{loo}}
 #' @inheritParams getBestModel
 #' 
 #' @export

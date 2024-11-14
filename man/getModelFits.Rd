@@ -18,7 +18,7 @@ getModelFits(
 
 \item{newdata}{data.frame containing all variables that appear in the model formula}
 
-\item{cores}{number of cores to use, see \code{\link{getLoo}}}
+\item{cores}{number of cores to use, compare \code{\link[loo]{loo}}}
 }
 \description{
 Get Model Fits
