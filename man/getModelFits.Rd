@@ -4,7 +4,12 @@
 \alias{getModelFits}
 \title{Get Model Fits}
 \usage{
-getModelFits(models, y = NULL, newdata = NULL)
+getModelFits(
+  models,
+  y = NULL,
+  newdata = NULL,
+  cores = getOption("mc.cores", 4)
+)
 }
 \arguments{
 \item{models}{list of models fitted by \code{\link{constrSelEst}} function}
@@ -12,6 +17,8 @@ getModelFits(models, y = NULL, newdata = NULL)
 \item{y}{response variable}
 
 \item{newdata}{data.frame containing all variables that appear in the model formula}
+
+\item{cores}{number of cores to use, see \code{\link{getLoo}}}
 }
 \description{
 Get Model Fits

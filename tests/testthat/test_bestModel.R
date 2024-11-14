@@ -42,7 +42,7 @@ test_that("test function bestModel", {
       iterations = 300
     )
   
-  fits <- getModelFits(models$models, y = data$y, newdata = data)
+  fits <- getModelFits(models$models, y = data$y, newdata = data, cores = getOption("mc.cores", 2))
   
   testthat::expect_equal(bestModel(models$models, fits[["Loo"]], thresholdSE = 1, ic = "Loo"),
                          1)

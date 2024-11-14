@@ -70,13 +70,13 @@ get_avg_model <- function(models_input, weights){
     s <<- do.call("+", list(s, sigma_matrices[[i]]* weights[i]) )
   })
   #ar
-  if(avg_model@ar1){
-    ar_matrices <- lapply(1:length(models_input), function(x){
+  if (avg_model@ar1) {
+    ar_matrices <- lapply(1:length(models_input), function(x) {
       ar_matrix <- extract(models_input[[x]])$ar
-    }) 
-    a <- ar_matrix[[1]] * weights[1]
-    tmp <- lapply(seq_along(ar_matrix)[-1], function(i){
-      a <<- do.call("+", list(a, ar_matrix[[i]]* weights[i]) )
+    })
+    a <- ar_matrices[[1]] * weights[1]
+    tmp <- lapply(seq_along(ar_matrices)[-1], function(i) {
+      a <<- do.call("+", list(a, ar_matrices[[i]] * weights[i]))
     })
   }
   

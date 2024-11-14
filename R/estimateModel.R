@@ -459,10 +459,10 @@ estimateBayesianModel <- function(data,
 }
 
 
-getLoo <- function(stanfit) {
+getLoo <- function(stanfit, cores = getOption("mc.cores", 4)) {
   log_lik1 <- extract_log_lik(stanfit, merge_chains = FALSE)
   rel_n_eff <- relative_eff(exp(log_lik1))
-  loos <- loo(log_lik1, rel_n_eff, cores = getOption("mc.cores", 4))
+  loos <- loo(log_lik1, rel_n_eff, cores = cores)
   waics <- waic(log_lik1)
   return(list(loos = loos, waics = waics))
 }
@@ -486,11 +486,12 @@ getBestModel <- function(models, thresholdSE = 1, ic = "Loo") {
 #' 
 #' @param y response variable
 #' @param newdata data.frame containing all variables that appear in the model formula
+#' @param cores number of cores to use, see \code{\link{getLoo}}
 #' @inheritParams getBestModel
 #' 
 #' @export
-getModelFits <- function(models, y = NULL, newdata = NULL){
-  loos <- suppressWarnings(lapply(models, getLoo))
+getModelFits <- function(models, y = NULL, newdata = NULL, cores = getOption("mc.cores", 4)){
+  loos <- suppressWarnings(lapply(models, getLoo, cores = cores))
   logLik <- lapply(models, function(x) extract(x)$log_lik)
   avgLiks <-  sapply(logLik, function(x) mean(rowSums(x)))
   nParam <- sapply(models, function(x) NCOL(extract(x)$betaAll))
