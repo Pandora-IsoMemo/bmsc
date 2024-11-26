@@ -18,4 +18,6 @@ COPY . .
 
 RUN Rscript -e "rstantools::rstan_config()"
 
+RUN ./createMakeVars
+
 RUN installPackage
