@@ -12,7 +12,7 @@ jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
     # We use the base-image of complex dependencies
-    container: ghcr.io/pandora-isomemo/base-image:latest
+    container: inwt/r-shiny:4.3.2
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
@@ -21,7 +21,7 @@ jobs:
       matrix:
         config:
           # We only test only a subset of os & r combination for non CRAN packages
-          
+
           # We can't test on mac-os, because Docker in Mac images aren't 
           # available due to licensing issues
           # - {os: macos-latest,   r: 'release'}
@@ -39,12 +39,15 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-pandoc@v2
-      
+
       - name: Compile rstan files via rstantools
         run: |
           # R is already installed in the base-image
           Rscript -e "rstantools::rstan_config()"
-      
+
+      - name: adjust MakeVars file
+        run: ./createMakeVars
+
       # R is already installed in the base-image
       # - uses: r-lib/actions/setup-r@v2
       #   with:
@@ -52,7 +55,7 @@ jobs:
       #     http-user-agent: ${{ matrix.config.http-user-agent }}
       #     use-public-rspm: true
       #     extra-repositories: https://Pandora-IsoMemo.github.io/drat/
-      
+
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
