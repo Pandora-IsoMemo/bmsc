@@ -29,6 +29,14 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v2
 
+      - name: install packages
+        run: |
+          installPackage \
+          mice \
+          rstan \
+          rstantools \
+          StanHeaders
+
       - name: Compile rstan files via rstantools
         run: |
           # R is already installed in the base-image
