@@ -16,7 +16,7 @@ permissions: read-all
 jobs:
   pkgdown:
     runs-on: ubuntu-latest
-    container: inwt/r-shiny:4.3.2
+    container:  ghcr.io/pandora-isomemo/base-image:latest
     # Only restrict concurrency for non-PR jobs
     concurrency:
       group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
@@ -28,14 +28,6 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-pandoc@v2
-
-      - name: install packages
-        run: |
-          installPackage \
-          mice \
-          rstan \
-          rstantools \
-          StanHeaders
 
       - name: Compile rstan files via rstantools
         run: |
