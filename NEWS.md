@@ -1,7 +1,9 @@
-# BMSC version 24.09.1
+# BMSC version 24.11.1
 
 ## Bugfixes
 - fix issues with RCMD check (#8)
+- add `cores` argument to `getModelFits` for running the test
+- adjust CI Pipeline & Dockerfile to generate the cpp code in the container
 
 # BMSC version 23.07.1.2
 
