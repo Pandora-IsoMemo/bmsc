@@ -20,5 +20,61 @@ Inherits from \code{\link[rstan]{stanfit}}
 \item{\code{scaleScale}}{numeric: scale scale of betas}
 
 \item{\code{cLevel}}{numeric: desired credible level}
+
+\item{\code{type}}{character: regression type: "linear" or "logistic"}
+
+\item{\code{catVars}}{character: names of categorical variables}
+
+\item{\code{designMatrix}}{data.frame: design matrix}
+
+\item{\code{Loo}}{numeric: Leave-one-out cross-validation}
+
+\item{\code{WAIC}}{numeric: Widely applicable information criterion}
+
+\item{\code{df}}{numeric: df}
+
+\item{\code{nagelkerke}}{numeric: Nagelkerke's R^2}
+
+\item{\code{MallowsCP}}{numeric: Mallows' Cp}
+
+\item{\code{AIC}}{numeric: Akaike information criterion}
+
+\item{\code{AICc}}{numeric: Corrected Akaike information criterion}
+
+\item{\code{BIC}}{numeric: Bayesian information criterion}
+
+\item{\code{AUC}}{numeric: Area under the curve}
+
+\item{\code{Rsq}}{numeric: R^2}
+
+\item{\code{RsqAdj}}{numeric: adjusted R^2}
+
+\item{\code{Bayes_Rsq}}{numeric: Bayesian R^2}
+
+\item{\code{varNames}}{character: variable names}
+
+\item{\code{model_name}}{character: name of the Stan model}
+
+\item{\code{model_pars}}{character: parameters of the Stan model}
+
+\item{\code{par_dims}}{list: dimensions of the parameters}
+
+\item{\code{mode}}{integer: mode of the sampler}
+
+\item{\code{sim}}{list: simulation data}
+
+\item{\code{inits}}{list: initial values for sampling}
+
+\item{\code{stan_args}}{list: arguments passed to the Stan model}
+
+\item{\code{stanmodel}}{list: compiled Stan model}
+
+\item{\code{date}}{character: date of model creation}
+
+\item{\code{ar1}}{logical: whether AR(1) structure is present}
+
+\item{\code{scaleYCenter}}{numeric: location scale for Y variable}
+
+\item{\code{scaleYScale}}{numeric: scale scale for Y variable}
 }}
 

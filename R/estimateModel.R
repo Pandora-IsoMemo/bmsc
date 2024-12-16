@@ -24,7 +24,8 @@
 #' @param scale logical: should the variables be scaled to mean 0 and sd 1?
 #' @param chains positive integer: number of chains for MCMC sampling
 #' @param iterations positive integer: number of iterations per chain for MCMC sampling
-#' @param shiny used for shiny?
+#' @param burnin burnin
+#' @param shiny logical: Used for shiny?
 #' @param imputeMissings boolean: impute missings by pmm method in mice package?
 #' @return A list of potential models
 #' @examples
@@ -214,8 +215,8 @@ selectModel <- function(formula,
     })
     varParts2 <- lapply(varParts2, function(x) paste(x, collapse = ":"))
     variableData$variableCat <- unlist(varParts2)
-    variableData <- variableData %>% group_by(variableCat) %>% summarise(K = mean(K)) %>% 
-      rename(variable = variableCat) %>% arrange(desc(K))
+    variableData <- variableData %>% group_by(.data$variableCat) %>% summarise(K = mean(K)) %>% 
+      rename(variable = .data$variableCat) %>% arrange(desc(K))
   }
   
   return(na.omit(variableData))
@@ -415,8 +416,8 @@ estimateBayesianModel <- function(data,
                                             control = list(adapt_delta = 0.8,
                                                            max_treedepth = 10)))
   
-  if(shiny){
-    incProgress(1/ nModels / 2.5)
+  if (shiny) {
+    incProgress(1 / nModels / 2.5)
   }
   
   varNames <- colnames(X)
@@ -458,10 +459,10 @@ estimateBayesianModel <- function(data,
 }
 
 
-getLoo <- function(stanfit) {
+getLoo <- function(stanfit, cores = getOption("mc.cores", 4)) {
   log_lik1 <- extract_log_lik(stanfit, merge_chains = FALSE)
   rel_n_eff <- relative_eff(exp(log_lik1))
-  loos <- loo(log_lik1, rel_n_eff, cores = getOption("mc.cores", 4))
+  loos <- loo(log_lik1, rel_n_eff, cores = cores)
   waics <- waic(log_lik1)
   return(list(loos = loos, waics = waics))
 }
@@ -481,9 +482,16 @@ getBestModel <- function(models, thresholdSE = 1, ic = "Loo") {
   return(list(bestModel = models[[bestSparse]]))
 }
 
+#' Get Model Fits
+#' 
+#' @param y response variable
+#' @param newdata data.frame containing all variables that appear in the model formula
+#' @param cores number of cores to use, compare \code{\link[loo]{loo}}
+#' @inheritParams getBestModel
+#' 
 #' @export
-getModelFits <- function(models, y = NULL, newdata = NULL){
-  loos <- suppressWarnings(lapply(models, getLoo))
+getModelFits <- function(models, y = NULL, newdata = NULL, cores = getOption("mc.cores", 4)){
+  loos <- suppressWarnings(lapply(models, getLoo, cores = cores))
   logLik <- lapply(models, function(x) extract(x)$log_lik)
   avgLiks <-  sapply(logLik, function(x) mean(rowSums(x)))
   nParam <- sapply(models, function(x) NCOL(extract(x)$betaAll))
@@ -528,6 +536,11 @@ getModelFits <- function(models, y = NULL, newdata = NULL){
               logLik = avgLiks, RsqAdj = RsqAdj, Rsq = Rsq, Bayes_Rsq = Bayes_Rsq, AUC = AUC, df = df, nagelkerke = nagelkerke))
 }
 
+#' Best model
+#' 
+#' @param loos list of model fits
+#' @inheritParams getBestModel
+#'
 #' @export
 bestModel <- function(models, loos, thresholdSE, ic){
   if(ic == "Loo"){

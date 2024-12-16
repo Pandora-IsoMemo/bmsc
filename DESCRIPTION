@@ -1,6 +1,6 @@
 Package: BMSC
 Title: Bayesian Model Selection under Constraints
-Version: 24.09.1
+Version: 24.09.2
 Authors@R: c(
     person("Marcus", "Groß", email = "marcus.gross@inwt-statistics.de", role = c("aut", "cre")),
     person("Ricardo", "Fernandes", email = "ldv1452@gmail.com", role = c("aut")),
@@ -11,12 +11,23 @@ Description: A Bayesian regression package supporting constrained coefficient es
     algorithm by a horseshoe prior  (<doi:10.1093/biomet/asq017>) that finds the optimal model considering main effects,
     interactions as well as powers of given variables under potential parameter constraints.
 Depends: R (>= 3.5.0), Rcpp (>= 1.0.0), methods
-Imports: dplyr (>= 0.7.4), ggplot2 (>= 2.2.1), loo (>= 2.0.0), rstan (>= 2.21.2),
-          rstantools (>= 2.1.1), R.utils (>= 2.6.0), pROC, mice
+Imports: 
+  dplyr (>= 0.7.4),
+  ggplot2 (>= 2.2.1),
+  loo (>= 2.0.0),
+  mice,
+  pROC,
+  rstan (>= 2.21.2),
+  rstantools (>= 2.1.1),
+  R.utils (>= 2.6.0),
+  shiny,
+  stats
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 LinkingTo: StanHeaders (>= 2.21.0-7), rstan (>= 2.21.2), BH (>= 1.72.0), Rcpp (>=
     1.0.0), RcppEigen (>= 0.3.3.3.0)
 Suggests: lintr, testthat
+SystemRequirements: GNUmake
 RoxygenNote: 7.2.3
+URL: https://pandora-isomemo.github.io/bmsc/

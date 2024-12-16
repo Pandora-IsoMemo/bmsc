@@ -1,7 +1,6 @@
 FROM inwt/r-shiny:4.3.2
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
     && apt-get autoremove -y \
     && apt-get autoclean -y \
     && rm -rf /var/lib/apt/lists/*
@@ -15,8 +14,10 @@ RUN installPackage \
     rstantools \
     StanHeaders
 
-ADD . .
+COPY . .
 
 RUN Rscript -e "rstantools::rstan_config()"
+
+RUN ./createMakeVars
 
 RUN installPackage

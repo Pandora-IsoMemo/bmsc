@@ -20,7 +20,7 @@ test_that("test function bestModel", {
   yUncertainty <- rexp(n, 10) * 0.01
   data <-
     data.frame(x1, x2, x3, x4 = as.character(x4), y, yUncertainty, x1Unc, x2Unc, x3Unc, x4Unc)
-  
+
   #estimate models
   models <-
     constrSelEst(
@@ -38,11 +38,11 @@ test_that("test function bestModel", {
       #yUncertainty = yUncertainty,
       maxNumTerms = 10,
       scale = T,
-      chains = 4,
+      chains = 2,
       iterations = 300
     )
   
-  fits <- getModelFits(models$models, y = data$y, newdata = data)
+  fits <- getModelFits(models$models, y = data$y, newdata = data, cores = getOption("mc.cores", 2))
   
   testthat::expect_equal(bestModel(models$models, fits[["Loo"]], thresholdSE = 1, ic = "Loo"),
                          1)
