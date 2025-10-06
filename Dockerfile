@@ -1,4 +1,4 @@
-FROM inwt/r-shiny:4.3.2
+FROM inwt/r-shiny:4.4.3
 
 RUN apt-get update \
     && apt-get autoremove -y \
