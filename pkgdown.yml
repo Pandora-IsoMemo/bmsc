@@ -2,7 +2,7 @@ pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles: {}
-last_built: 2025-10-06T11:45Z
+last_built: 2025-10-28T14:31Z
 urls:
   reference: https://pandora-isomemo.github.io/bmsc/reference
   article: https://pandora-isomemo.github.io/bmsc/articles
