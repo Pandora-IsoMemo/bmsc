@@ -1,6 +1,6 @@
 Package: BMSC
 Title: Bayesian Model Selection under Constraints
-Version: 24.09.2
+Version: 26.07.0
 Authors@R: c(
     person("Marcus", "Groß", email = "marcus.gross@inwt-statistics.de", role = c("aut", "cre")),
     person("Ricardo", "Fernandes", email = "ldv1452@gmail.com", role = c("aut")),

@@ -1,3 +1,8 @@
+# BMSC version 26.07.0
+
+## Updates
+- Updated base image in Dockerfile to r-shiny:4.4.1
+
 # BMSC version 24.11.1
 
 ## Bugfixes
