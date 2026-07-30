@@ -20,4 +20,6 @@ RUN Rscript -e "rstantools::rstan_config()"
 
 RUN ./createMakeVars
 
+RUN Rscript -e "for (p in c('rstan', 'rstantools', 'StanHeaders', 'Rcpp', 'RcppEigen', 'BH')) cat(p, as.character(packageVersion(p)), '\n')"
+
 RUN installPackage
