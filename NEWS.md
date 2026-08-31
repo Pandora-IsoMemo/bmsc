@@ -1,3 +1,9 @@
+# BMSC version 26.08.0
+
+## Updates
+- Expanded and organized .Rbuildignore, .gitignore, and .dockerignore entries to reduce accidental inclusion of local/CI/build artifacts.
+- Increased the required DataTools version to the most recent version.
+
 # BMSC version 26.07.0
 
 ## Updates

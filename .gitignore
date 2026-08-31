@@ -1,5 +1,25 @@
 .Renviron
+.Rprofile
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+.DS_Store
+Rplots.pdf
+
+# R package build/check outputs
+*.Rcheck/
+*.tar.gz
+
+# Local package/library installs
+lib/
+libMac/
+libLinux/
+libWin/
+
+# Compiled artifacts generated during package installation
+src/Makevars_old.txt
+src/*.o
+src/*.so
+src/*.dll
+src/*.dylib

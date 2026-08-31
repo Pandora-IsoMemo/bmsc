@@ -8,8 +8,11 @@
 ^covr$
 ^deps$
 ^RScripts$
+^src/Makevars_old\.txt$
 ^src/.+\.so$
 ^src/.+\.o$
+^src/.+\.dll$
+^src/.+\.dylib$
 ^LICENSE\.md$
 ^Jenkinsfile$
 ^JenkinsfileMPI$
