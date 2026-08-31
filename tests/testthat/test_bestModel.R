@@ -41,9 +41,14 @@ test_that("test function bestModel", {
       chains = 2,
       iterations = 300
     )
-  
+  print(names(models))
+
   fits <- getModelFits(models$models, y = data$y, newdata = data, cores = getOption("mc.cores", 2))
-  
+
+  print(rownames(loo::loo_compare(fits[["Loo"]])))
+  print(rownames(loo::loo_compare(fits[["WAIC"]])))
+  print(fits[["RsqAdj"]])
+
   testthat::expect_equal(bestModel(models$models, fits[["Loo"]], thresholdSE = 1, ic = "Loo"),
                          1)
   testthat::expect_equal(bestModel(models$models, fits[["WAIC"]], thresholdSE = 1, ic = "WAIC"),
