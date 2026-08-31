@@ -55,9 +55,10 @@ jobs:
           Rscript -e "rstantools::rstan_config()"
 
       - name: adjust MakeVars file
+        shell: bash
         run: |
-          export R_HOME="$(R RHOME)"
-          ./createMakeVars
+          export R_HOME="$(Rscript -e 'cat(R.home())')"
+          bash ./createMakeVars
 
       - uses: r-lib/actions/check-r-package@v2
         with:
