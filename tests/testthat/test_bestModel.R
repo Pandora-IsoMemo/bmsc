@@ -41,21 +41,42 @@ test_that("test function bestModel", {
       chains = 2,
       iterations = 300
     )
-  print(names(models))
+  print(names(models$models))
 
   fits <- getModelFits(models$models, y = data$y, newdata = data, cores = getOption("mc.cores", 2))
 
-  print(rownames(loo::loo_compare(fits[["Loo"]])))
-  print(rownames(loo::loo_compare(fits[["WAIC"]])))
-  print(fits[["RsqAdj"]])
+  loo_names <- rownames(loo::loo_compare(fits[["Loo"]]))
+  waic_names <- rownames(loo::loo_compare(fits[["WAIC"]]))
 
-  testthat::expect_equal(bestModel(models$models, fits[["Loo"]], thresholdSE = 1, ic = "Loo"),
-                         1)
-  testthat::expect_equal(bestModel(models$models, fits[["WAIC"]], thresholdSE = 1, ic = "WAIC"),
-                         1)
-  testthat::expect_equal(bestModel(models$models, fits[["RsqAdj"]], thresholdSE = 1, ic = "RsqAdj"),
-                         c(`y ~ x1 + x2 + x3` = 2L))
-  
+  print(names(models$models))
+  print(loo_names)
+  print(waic_names)
+
+  testthat::expect_equal(
+    bestModel(models$models, fits[["Loo"]], thresholdSE = 1, ic = "Loo"),
+    1,
+    info = paste(
+      "model names:", paste(names(models$models), collapse = " | "),
+      "\nloo_compare rownames:", paste(loo_names, collapse = " | ")
+    )
+  )
+  testthat::expect_equal(
+    bestModel(models$models, fits[["WAIC"]], thresholdSE = 1, ic = "WAIC"),
+    1,
+    info = paste(
+      "model names:", paste(names(models$models), collapse = " | "),
+      "\nwaic_compare rownames:", paste(waic_names, collapse = " | ")
+    )
+  )
+  testthat::expect_equal(
+    bestModel(models$models, fits[["RsqAdj"]], thresholdSE = 1, ic = "RsqAdj"),
+    c(`y ~ x1 + x2 + x3` = 2L),
+    info = paste(
+      "model names:", paste(names(models$models), collapse = " | "),
+      "\nRsqAdj rownames:", paste(rownames(fits[["RsqAdj"]]), collapse = " | ")
+    )
+  )
+
   for (ic in c("AIC",
                "AICc",
                "MallowsCP",
