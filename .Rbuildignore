@@ -47,3 +47,4 @@
 
 ^inst/data$
 ^createMakeVars
+^RScripts$
