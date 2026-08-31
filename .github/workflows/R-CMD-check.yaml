@@ -49,6 +49,37 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
+      - name: Show R and package versions
+        shell: Rscript {0}
+        run: |
+          cat("R:", R.version.string, "\n")
+          cat("R_HOME:", R.home(), "\n")
+          cat("Libraries:\n")
+          print(.libPaths())
+          cat("Repositories:\n")
+          print(getOption("repos"))
+
+          packages <- c(
+            "rstan",
+            "StanHeaders",
+            "rstantools",
+            "Rcpp",
+            "RcppEigen",
+            "RcppParallel",
+            "BH",
+            "loo",
+            "testthat",
+            "rcmdcheck"
+          )
+
+          for (pkg in packages) {
+            if (requireNamespace(pkg, quietly = TRUE)) {
+              cat(pkg, as.character(utils::packageVersion(pkg)), "\n")
+            } else {
+              cat(pkg, "NOT INSTALLED\n")
+            }
+          }
+
       - name: Compile rstan files via rstantools
         run: |
           # R is already installed in the base-image
