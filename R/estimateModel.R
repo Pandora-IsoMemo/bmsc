@@ -573,14 +573,36 @@ bestModel <- function(models, loos, thresholdSE, ic){
   if(ic %in% c("Rsq", "RsqAdj", "AUC", "Bayes_Rsq")){
     best <- which.max(loos)
   }
-  if(ic %in% c("Loo", "WAIC")){
+  if (ic %in% c("Loo", "WAIC")) {
     looC <- loo_compare(loos)
-    comparison <- data.frame(looC, diffNumParam = unlist(unname(lapply(models, function(x) {
-      NCOL(extract(models[[best]])$betaAll) - NCOL(extract(x)$betaAll)})))[match(rownames(looC), names(models))])
+
+    comparisonNames <- rownames(looC)
+    comparisonOrder <- match(comparisonNames, names(models))
+
+    if (anyNA(comparisonOrder) && all(grepl("^[0-9]+$", comparisonNames))) {
+      comparisonOrder <- as.integer(comparisonNames)
+    }
+
+    comparison <- data.frame(
+      looC,
+      diffNumParam = unlist(unname(lapply(models, function(x) {
+        NCOL(extract(models[[best]])$betaAll) - NCOL(extract(x)$betaAll)
+      })))[comparisonOrder]
+    )
+
+    # comparison <- data.frame(
+    #   looC,
+    #   diffNumParam = unlist(unname(lapply(models, function(x) {
+    #     NCOL(extract(models[[best]])$betaAll) - NCOL(extract(x)$betaAll)
+    #   })))[match(rownames(looC), names(models))]
+    # )
+
     # only sparse models
-    comparison$elpd_diff [comparison$diffNumParam < 0] <- -Inf
+    comparison$elpd_diff[comparison$diffNumParam < 0] <- -Inf
     bestLoo <- which.max(comparison$elpd_diff + comparison$se_diff * thresholdSE)
-    return(which(names(models) == rownames(comparison)[bestLoo]))
+
+    # return(which(names(models) == rownames(comparison)[bestLoo]))
+    return(comparisonOrder[bestLoo])
   } else {
     return(best)
   }
