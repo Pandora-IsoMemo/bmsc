@@ -1,0 +1,96 @@
+# Package index
+
+## All functions
+
+- [`ConstrainedLinReg-class`](https://pandora-isomemo.github.io/bmsc/reference/ConstrainedLinReg-class.md)
+  [`ConstrainedLinReg`](https://pandora-isomemo.github.io/bmsc/reference/ConstrainedLinReg-class.md)
+  : S4 class for constrained linear regression models
+
+- [`addInteractionToVars()`](https://pandora-isomemo.github.io/bmsc/reference/addInteractionToVars.md)
+  : Add interactions of a specific order to a vector of variables
+
+- [`addInvPowToVars()`](https://pandora-isomemo.github.io/bmsc/reference/addInvPowToVars.md)
+  : Add inverse exponent to a vector of variables
+
+- [`addPowToVars()`](https://pandora-isomemo.github.io/bmsc/reference/addPowToVars.md)
+  : Add exponent to a vector of variables
+
+- [`bestModel()`](https://pandora-isomemo.github.io/bmsc/reference/bestModel.md)
+  : Best model
+
+- [`constrSelEst()`](https://pandora-isomemo.github.io/bmsc/reference/constrSelEst.md)
+  : Model selection algorithm for constrained estimation
+
+- [`createFormula()`](https://pandora-isomemo.github.io/bmsc/reference/createFormula.md)
+  : Create a formula with interactions and polynomials up to a desired
+  order
+
+- [`createFormulaInternal()`](https://pandora-isomemo.github.io/bmsc/reference/createFormulaInternal.md)
+  :
+
+  Create formula with interactions and polynomials if all checks in
+  `createFormula` have passed
+
+- [`extractVarname()`](https://pandora-isomemo.github.io/bmsc/reference/extractVarname.md)
+  : Extract variable name from polynomial expression
+
+- [`getBestModel()`](https://pandora-isomemo.github.io/bmsc/reference/getBestModel.md)
+  : Get Best Model after Models Selection
+
+- [`getBetaMatrix()`](https://pandora-isomemo.github.io/bmsc/reference/getBetaMatrix.md)
+  :
+
+  Extract beta matrix from `ConstrainedLinReg` model
+
+- [`getModelFits()`](https://pandora-isomemo.github.io/bmsc/reference/getModelFits.md)
+  : Get Model Fits
+
+- [`get_avg_model()`](https://pandora-isomemo.github.io/bmsc/reference/get_avg_model.md)
+  : Compute model average
+
+- [`get_model_weights()`](https://pandora-isomemo.github.io/bmsc/reference/get_model_weights.md)
+  : Compute model weights according to measure
+
+- [`handleMissingData()`](https://pandora-isomemo.github.io/bmsc/reference/handleMissingData.md)
+  : Exclude rows with missing values
+
+- [`makeInteractions()`](https://pandora-isomemo.github.io/bmsc/reference/makeInteractions.md)
+  : Add all interactions up to a desired order
+
+- [`makePoly()`](https://pandora-isomemo.github.io/bmsc/reference/makePoly.md)
+  :
+
+  Create polynomial of degree `maxExponent` from variable names
+
+- [`plotModelFit()`](https://pandora-isomemo.github.io/bmsc/reference/plotModelFit.md)
+  : Plot errors of all models
+
+- [`plotModels()`](https://pandora-isomemo.github.io/bmsc/reference/plotModels.md)
+  : Plot model errors with errorbars
+
+- [`predict(`*`<ConstrainedLinReg>`*`)`](https://pandora-isomemo.github.io/bmsc/reference/predict-ConstrainedLinReg-method.md)
+  : Compute predictions from constraint estimation model
+
+- [`prepColorVec()`](https://pandora-isomemo.github.io/bmsc/reference/prepColorVec.md)
+  : Prepare colour vector
+
+- [`prepDatForPredict()`](https://pandora-isomemo.github.io/bmsc/reference/prepDatForPredict.md)
+  : Exclude rows with missing data on predictor variables
+
+- [`prepModelNames()`](https://pandora-isomemo.github.io/bmsc/reference/prepModelNames.md)
+  : Extract model names from model objects
+
+- [`prepPlotData()`](https://pandora-isomemo.github.io/bmsc/reference/prepPlotData.md)
+  : Prepare data to plot model fit
+
+- [`print(`*`<ConstrainedLinReg>`*`)`](https://pandora-isomemo.github.io/bmsc/reference/print.ConstrainedLinReg.md)
+  : Print constraint estimation model
+
+- [`show(`*`<ConstrainedLinReg>`*`)`](https://pandora-isomemo.github.io/bmsc/reference/show-ConstrainedLinReg-method.md)
+  : Print constraint estimation model
+
+- [`sortAndPaste()`](https://pandora-isomemo.github.io/bmsc/reference/sortAndPaste.md)
+  : Sort a vector and collapse elements together using ":"
+
+- [`tryAsFormula()`](https://pandora-isomemo.github.io/bmsc/reference/tryAsFormula.md)
+  : Turn character vector into formula, return error if not possible
