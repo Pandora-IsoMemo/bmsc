@@ -44,41 +44,16 @@ jobs:
           use-public-rspm: true
           extra-repositories: https://Pandora-IsoMemo.github.io/drat/
 
+      - name: Show R version
+        run: |
+          echo "Matrix R selector: ${{ matrix.config.r }}"
+          Rscript -e 'cat("Resolved R version:", R.version.string, "\n")'
+          Rscript -e 'cat("Repositories:\n"); print(getOption("repos"))'
+
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
           needs: check
-
-      - name: Show R and package versions
-        shell: Rscript {0}
-        run: |
-          cat("R:", R.version.string, "\n")
-          cat("R_HOME:", R.home(), "\n")
-          cat("Libraries:\n")
-          print(.libPaths())
-          cat("Repositories:\n")
-          print(getOption("repos"))
-
-          packages <- c(
-            "rstan",
-            "StanHeaders",
-            "rstantools",
-            "Rcpp",
-            "RcppEigen",
-            "RcppParallel",
-            "BH",
-            "loo",
-            "testthat",
-            "rcmdcheck"
-          )
-
-          for (pkg in packages) {
-            if (requireNamespace(pkg, quietly = TRUE)) {
-              cat(pkg, as.character(utils::packageVersion(pkg)), "\n")
-            } else {
-              cat(pkg, "NOT INSTALLED\n")
-            }
-          }
 
       - name: Compile rstan files via rstantools
         run: |

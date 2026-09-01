@@ -590,13 +590,6 @@ bestModel <- function(models, loos, thresholdSE, ic){
       })))[comparisonOrder]
     )
 
-    # comparison <- data.frame(
-    #   looC,
-    #   diffNumParam = unlist(unname(lapply(models, function(x) {
-    #     NCOL(extract(models[[best]])$betaAll) - NCOL(extract(x)$betaAll)
-    #   })))[match(rownames(looC), names(models))]
-    # )
-
     # only sparse models
     comparison$elpd_diff[comparison$diffNumParam < 0] <- -Inf
     bestLoo <- which.max(comparison$elpd_diff + comparison$se_diff * thresholdSE)

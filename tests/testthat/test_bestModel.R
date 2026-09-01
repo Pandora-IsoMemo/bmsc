@@ -38,10 +38,9 @@ test_that("test function bestModel", {
       #yUncertainty = yUncertainty,
       maxNumTerms = 10,
       scale = TRUE,
-      # not stable enough for smaller chains and iterations
-      # iterations = 300
       chains = 2,
       burnin = 500,
+      # iterations = 300 # not stable enough for less iterations
       iterations = 600
     )
   print(names(models$models))
@@ -50,16 +49,6 @@ test_that("test function bestModel", {
 
   loo_names <- rownames(loo::loo_compare(fits[["Loo"]]))
   waic_names <- rownames(loo::loo_compare(fits[["WAIC"]]))
-
-  print(loo_names)
-  print(waic_names)
-
-  res <- bestModel(models$models, fits[["RsqAdj"]], thresholdSE = 1, ic = "RsqAdj")
-  dput(res)
-  dput(unname(res))
-  dput(names(res))
-  dput(fits[["RsqAdj"]])
-  dput(which.max(fits[["RsqAdj"]]))
 
   testthat::expect_equal(
     bestModel(models$models, fits[["Loo"]], thresholdSE = 1, ic = "Loo"),
@@ -88,11 +77,12 @@ test_that("test function bestModel", {
 
   testthat::expect_equal(
     bestModel(models$models, fits[["RsqAdj"]], thresholdSE = 1, ic = "RsqAdj"),
-    # c(`y ~ x1 + x2 + x3` = 2L), # not a stable result, stochastic model-selection brittleness
+    # c(`y ~ x1 + x2 + x3` = 2L), # not a stable result, stochastic model-selection uncertainty
     which.max(fits[["RsqAdj"]]),
     info = paste(
       "model names:", paste(names(models$models), collapse = " | "),
       "\nRsqAdj rownames:", paste(names(fits[["RsqAdj"]]), collapse = " | "),
+      "\nwhich.max(fits[[\"RsqAdj\"]]):", which.max(fits[["RsqAdj"]]),
       "\nbest model:", paste(
         bestModel(models$models, fits[["RsqAdj"]], thresholdSE = 1, ic = "RsqAdj"),
         collapse = " | ")
