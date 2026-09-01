@@ -1,25 +1,50 @@
-^.+\.Rproj$
+# RStudio / IDE files
+^.*\.Rproj$
 ^\.Rproj\.user$
-^libWin$
-^libLinux$
-^libMac$
-^lib$
+^\.vscode$
+
+# Local/user config
+^\.Rprofile$
+^\.Renviron$
+^\.env$
+^\.lintr$
+
+# Version control / GitHub
+^\.git$
+^\.gitignore$
+^\.github$
+
+# CI / deployment / containers
 ^Dockerfile$
-^covr$
-^deps$
-^RScripts$
-^src/.+\.so$
-^src/.+\.o$
-^LICENSE\.md$
-^Jenkinsfile$
-^JenkinsfileMPI$
 ^\.dockerignore$
-^bin$
+^Jenkinsfile$
 ^deploy\.sh$
-^\..*$
-^inst/data$
+
+# pkgdown site and config
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-^\.github$
+
+# Local dependency/vendor libraries
+^lib$
+^libWin$
+^libMac$
+^libLinux$
+^deps$
+
+# Build/test artifacts
+^covr$
+^bin$
+^src/.+\.so$
+^src/.+\.o$
+^src/.+\.dll$
+^src/.+\.dylib$
+^.*\.tar\.gz$
+^.*\.Rcheck$
+
+# Non-package license/readme variants
+^LICENSE\.md$
+
+^inst/data$
 ^createMakeVars
+^RScripts$

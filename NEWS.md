@@ -1,3 +1,9 @@
+# BMSC version 26.08.0
+
+## Updates
+- Regenerated Stan model export sources/headers (stanc3 v2.32.2 output) for `linReg` and `linRegHorseShoe`.
+- Expanded and organized `.Rbuildignore`, `.gitignore`, and `.dockerignore` entries to reduce accidental inclusion of local/CI/build artifacts.
+
 # BMSC version 26.07.0
 
 ## Updates

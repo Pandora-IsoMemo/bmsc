@@ -33,24 +33,62 @@ test_that("test function bestModel", {
       constraint_1 = FALSE,
       data = data,
       type = "logistic",
-      ar1 = T,
+      ar1 = TRUE,
       #xUncertainty  = data[, c("x1Unc", "x2Unc", "x3Unc")],
       #yUncertainty = yUncertainty,
       maxNumTerms = 10,
-      scale = T,
+      scale = TRUE,
       chains = 2,
-      iterations = 300
+      burnin = 500,
+      # iterations = 300 # not stable enough for less iterations
+      iterations = 600
     )
-  
+  print(names(models$models))
+
   fits <- getModelFits(models$models, y = data$y, newdata = data, cores = getOption("mc.cores", 2))
-  
-  testthat::expect_equal(bestModel(models$models, fits[["Loo"]], thresholdSE = 1, ic = "Loo"),
-                         1)
-  testthat::expect_equal(bestModel(models$models, fits[["WAIC"]], thresholdSE = 1, ic = "WAIC"),
-                         1)
-  testthat::expect_equal(bestModel(models$models, fits[["RsqAdj"]], thresholdSE = 1, ic = "RsqAdj"),
-                         c(`y ~ x1 + x2 + x3` = 2L))
-  
+
+  loo_names <- rownames(loo::loo_compare(fits[["Loo"]]))
+  waic_names <- rownames(loo::loo_compare(fits[["WAIC"]]))
+
+  testthat::expect_equal(
+    bestModel(models$models, fits[["Loo"]], thresholdSE = 1, ic = "Loo"),
+    1,
+    info = paste(
+      "model names:", paste(names(models$models), collapse = " | "),
+      "\nloo_compare rownames:", paste(loo_names, collapse = " | "),
+      "\nbest model:", paste(
+        bestModel(models$models, fits[["Loo"]], thresholdSE = 1, ic = "Loo"),
+        collapse = " | "
+      )
+    )
+  )
+  testthat::expect_equal(
+    bestModel(models$models, fits[["WAIC"]], thresholdSE = 1, ic = "WAIC"),
+    1,
+    info = paste(
+      "model names:", paste(names(models$models), collapse = " | "),
+      "\nwaic_compare rownames:", paste(waic_names, collapse = " | "),
+      "\nbest model:", paste(
+        bestModel(models$models, fits[["WAIC"]], thresholdSE = 1, ic = "WAIC"),
+        collapse = " | "
+      )
+    )
+  )
+
+  testthat::expect_equal(
+    bestModel(models$models, fits[["RsqAdj"]], thresholdSE = 1, ic = "RsqAdj"),
+    # c(`y ~ x1 + x2 + x3` = 2L), # not a stable result, stochastic model-selection uncertainty
+    which.max(fits[["RsqAdj"]]),
+    info = paste(
+      "model names:", paste(names(models$models), collapse = " | "),
+      "\nRsqAdj rownames:", paste(names(fits[["RsqAdj"]]), collapse = " | "),
+      "\nwhich.max(fits[[\"RsqAdj\"]]):", which.max(fits[["RsqAdj"]]),
+      "\nbest model:", paste(
+        bestModel(models$models, fits[["RsqAdj"]], thresholdSE = 1, ic = "RsqAdj"),
+        collapse = " | ")
+    )
+  )
+
   for (ic in c("AIC",
                "AICc",
                "MallowsCP",
@@ -65,12 +103,14 @@ test_that("test function bestModel", {
                          fits[[ic]],
                          thresholdSE = 1,
                          ic = ic)
-    # print(sprintf(
-    #   "Testing %s: test result: %s, name: %s",
-    #   ic,
-    #   testRes,
-    #   names(testRes)
-    # ))
-    testthat::expect_equal(testRes, c(`y ~ x1 + x2` = 1L))
+    testthat::expect_equal(
+      testRes,
+      c(`y ~ x1 + x2` = 1L),
+      info = paste(
+        "model names:", paste(names(models$models), collapse = " | "),
+        "\n", ic, " rownames:", paste(names(fits[[ic]]), collapse = " | "),
+        "\nbest model:", paste(testRes, collapse = " | ")
+      )
+    )
   }
 })

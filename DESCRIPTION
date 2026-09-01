@@ -1,6 +1,7 @@
 Package: BMSC
 Title: Bayesian Model Selection under Constraints
-Version: 26.07.0
+Version: 26.08.0
+Date: 2026-08-31
 Authors@R: c(
     person("Marcus", "Groß", email = "marcus.gross@inwt-statistics.de", role = c("aut", "cre")),
     person("Ricardo", "Fernandes", email = "ldv1452@gmail.com", role = c("aut")),
@@ -17,17 +18,16 @@ Imports:
   loo (>= 2.0.0),
   mice,
   pROC,
-  rstan (>= 2.21.2),
-  rstantools (>= 2.1.1),
+  rstan (>= 2.32.0),
+  rstantools (>= 2.4.0),
   R.utils (>= 2.6.0),
   shiny,
   stats
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
-LinkingTo: StanHeaders (>= 2.21.0-7), rstan (>= 2.21.2), BH (>= 1.72.0), Rcpp (>=
-    1.0.0), RcppEigen (>= 0.3.3.3.0)
+LinkingTo: StanHeaders (>= 2.32.0), rstan (>= 2.32.0), BH (>= 1.72.0), Rcpp (>= 1.0.0), RcppEigen (>= 0.3.3.3.0)
 Suggests: lintr, testthat
 SystemRequirements: GNUmake
-RoxygenNote: 7.2.3
 URL: https://pandora-isomemo.github.io/bmsc/
+Config/roxygen2/version: 8.0.0
