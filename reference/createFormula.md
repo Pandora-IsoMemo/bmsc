@@ -64,10 +64,10 @@ polynomials and interactions.
 createFormula("y ~ x1 + x2", 2, 3)
 #> y ~ x1 + x2 + I(x1^2) + I(x2^2) + I(x1^-2) + I(x2^-2) + I(x1^-3) + 
 #>     I(x2^-3)
-#> <environment: 0x55a629908220>
+#> <environment: 0x556ba1bde270>
 createFormula(as.formula("y ~ x1 + x2"), interactionDepth = 2)
 #> y ~ x1 + x2 + x1:x2
-#> <environment: 0x55a62995ac78>
+#> <environment: 0x556ba1c43210>
 
 carFormula <- createFormula("mpg ~ cyl + disp + drat", 2, 3)
 summary(lm(carFormula, mtcars))

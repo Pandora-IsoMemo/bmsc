@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">BMSC</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">26.08.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">26.09.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,7 +76,8 @@
 <ul>
 <li>to re-generate <code>R/stanmodel.R</code> and the C++ Source Code in src use <code><a href="https://mc-stan.org/rstantools/reference/rstan_config.html" class="external-link">rstantools::rstan_config()</a></code>
 </li>
-<li>Next, execute the <code>./createMakeVars</code> script. This step is essential to ensure <code>devtools::check()</code> functions correctly.</li>
+<li>
+<code>src/Makevars</code> is generated automatically during source installation via the package <code>configure</code> script. For local development, you can run <code>./configure</code> or <code>./createMakeVars</code> manually before <code>devtools::check()</code> if needed. The generated file is ignored and should not be committed.</li>
 <li>After that you can install and compile the package e.g. <code>devtools::load_all()</code>
 </li>
 </ul>

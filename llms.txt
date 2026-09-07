@@ -21,8 +21,11 @@ construction, missing-data handling, model comparison, and prediction.
 
 - to re-generate `R/stanmodel.R` and the C++ Source Code in src use
   [`rstantools::rstan_config()`](https://mc-stan.org/rstantools/reference/rstan_config.html)
-- Next, execute the `./createMakeVars` script. This step is essential to
-  ensure `devtools::check()` functions correctly.
+- `src/Makevars` is generated automatically during source installation
+  via the package `configure` script. For local development, you can run
+  `./configure` or `./createMakeVars` manually before
+  `devtools::check()` if needed. The generated file is ignored and
+  should not be committed.
 - After that you can install and compile the package
   e.g. `devtools::load_all()`
 

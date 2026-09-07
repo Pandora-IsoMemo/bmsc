@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">BMSC</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">26.08.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">26.09.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,6 +31,16 @@
 
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="26.09.0" id="bmsc-version-26090">BMSC version 26.09.0<a class="anchor" aria-label="anchor" href="#bmsc-version-26090"></a></h2>
+<div class="section level3">
+<h3 id="bugfixes-26-09-0">Bugfixes<a class="anchor" aria-label="anchor" href="#bugfixes-26-09-0"></a></h3>
+<ul><li>Added an install-time <code>configure</code> script so source installations regenerate <code>src/Makevars</code> with the local <code>StanHeaders</code>, <code>rstan</code>, and <code>RcppParallel</code> paths instead of using stale paths from the build machine.</li>
+<li>Stopped tracking and shipping generated <code>src/Makevars</code>, preventing local development commands from leaving machine-specific paths in version control.</li>
+<li>Declared <code>RcppParallel</code> in <code>LinkingTo</code> and updated CI/Docker setup to rely on the package <code>configure</code> script for Makevars generation.</li>
+<li>Updated Stan model array declarations to the current syntax required by stanc3/rstan during <code><a href="https://mc-stan.org/rstantools/reference/rstan_config.html" class="external-link">rstantools::rstan_config()</a></code>.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="26.08.0" id="bmsc-version-26080">BMSC version 26.08.0<a class="anchor" aria-label="anchor" href="#bmsc-version-26080"></a></h2>
 <div class="section level3">
