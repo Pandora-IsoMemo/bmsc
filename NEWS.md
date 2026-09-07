@@ -1,3 +1,14 @@
+# BMSC version 26.09.0
+
+## Bugfixes
+- Added an install-time `configure` script so source installations regenerate
+  `src/Makevars` with the local `StanHeaders`, `rstan`, and `RcppParallel`
+  paths instead of using stale paths from the build machine.
+- Replaced hard-coded absolute paths in `src/Makevars` with dynamic fallback
+  lookups for local builds.
+- Declared `RcppParallel` in `LinkingTo` and updated CI/Docker setup to rely on
+  the package `configure` script for Makevars generation.
+
 # BMSC version 26.08.0
 
 ## Updates
