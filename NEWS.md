@@ -8,6 +8,8 @@
   development commands from leaving machine-specific paths in version control.
 - Declared `RcppParallel` in `LinkingTo` and updated CI/Docker setup to rely on
   the package `configure` script for Makevars generation.
+- Updated Stan model array declarations to the current syntax required by
+  stanc3/rstan during `rstantools::rstan_config()`.
 
 # BMSC version 26.08.0
 

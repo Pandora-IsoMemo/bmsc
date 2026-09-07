@@ -8,7 +8,7 @@ data {
   int ar1;
   real<lower = 0> varY;
   vector[N] y; //the response
-  int<lower=0,upper=1> yL[N]; //the response (0/1);
+  array[N] int<lower=0,upper=1> yL; //the response (0/1);
   vector<lower = 0>[N] yUncertainty; //sd of uncertainties in Y
   matrix<lower = 0>[N,K] xUncertaintyMatrix; // sd of uncertainties in X
   matrix[N,K] X; //the model matrix

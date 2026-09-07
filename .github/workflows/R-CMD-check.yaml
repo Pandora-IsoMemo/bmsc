@@ -57,7 +57,6 @@ jobs:
 
       - name: Compile rstan files via rstantools
         run: |
-          # R is already installed in the base-image
           Rscript -e "rstantools::rstan_config()"
 
       - uses: r-lib/actions/check-r-package@v2

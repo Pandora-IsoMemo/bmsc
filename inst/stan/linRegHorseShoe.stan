@@ -5,8 +5,8 @@ data {
   int K1; //Intercept yes/no?
   int logitR;
   real<lower = 0> varY;
-  real y[N]; //the response
-  int<lower=0,upper=1> yL[N]; //the response (0/1);
+  array[N] real y; //the response
+  array[N] int<lower=0,upper=1> yL; //the response (0/1);
   vector[N] yUncertainty; //sd of uncertainties in Y
   matrix[N, K] X; //the model matrix
   matrix[N, K2] X2; //the model matrix
