@@ -1,7 +1,7 @@
 Package: BMSC
 Title: Bayesian Model Selection under Constraints
-Version: 26.08.0
-Date: 2026-08-31
+Version: 26.09.0
+Date: 2026-09-07
 Authors@R: c(
     person("Marcus", "Groß", email = "marcus.gross@inwt-statistics.de", role = c("aut", "cre")),
     person("Ricardo", "Fernandes", email = "ldv1452@gmail.com", role = c("aut")),
@@ -26,7 +26,7 @@ Imports:
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
-LinkingTo: StanHeaders (>= 2.32.0), rstan (>= 2.32.0), BH (>= 1.72.0), Rcpp (>= 1.0.0), RcppEigen (>= 0.3.3.3.0)
+LinkingTo: StanHeaders (>= 2.32.0), rstan (>= 2.32.0), BH (>= 1.72.0), Rcpp (>= 1.0.0), RcppEigen (>= 0.3.3.3.0), RcppParallel
 Suggests: lintr, testthat
 SystemRequirements: GNUmake
 URL: https://pandora-isomemo.github.io/bmsc/
