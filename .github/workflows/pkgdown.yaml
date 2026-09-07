@@ -41,14 +41,9 @@ jobs:
         run: |
           Rscript -e "rstantools::rstan_config()"
 
-      - name: adjust MakeVars file
-        run: |
-          export R_HOME="$(R RHOME)"
-          ./createMakeVars
-
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: local::.
+      - name: Install package
+        run: R CMD INSTALL --no-multiarch --with-keep.source .
+        shell: bash
 
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)

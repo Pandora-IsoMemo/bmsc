@@ -39,6 +39,7 @@
 ^src/.+\.o$
 ^src/.+\.dll$
 ^src/.+\.dylib$
+^src/Makevars$
 ^.*\.tar\.gz$
 ^.*\.Rcheck$
 

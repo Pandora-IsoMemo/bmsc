@@ -1,3 +1,16 @@
+# BMSC version 26.09.0
+
+## Bugfixes
+- Added an install-time `configure` script so source installations regenerate
+  `src/Makevars` with the local `StanHeaders`, `rstan`, and `RcppParallel`
+  paths instead of using stale paths from the build machine.
+- Stopped tracking and shipping generated `src/Makevars`, preventing local
+  development commands from leaving machine-specific paths in version control.
+- Declared `RcppParallel` in `LinkingTo` and updated CI/Docker setup to rely on
+  the package `configure` script for Makevars generation.
+- Updated Stan model array declarations to the current syntax required by
+  stanc3/rstan during `rstantools::rstan_config()`.
+
 # BMSC version 26.08.0
 
 ## Updates
