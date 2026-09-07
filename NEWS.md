@@ -4,8 +4,8 @@
 - Added an install-time `configure` script so source installations regenerate
   `src/Makevars` with the local `StanHeaders`, `rstan`, and `RcppParallel`
   paths instead of using stale paths from the build machine.
-- Replaced hard-coded absolute paths in `src/Makevars` with dynamic fallback
-  lookups for local builds.
+- Stopped tracking and shipping generated `src/Makevars`, preventing local
+  development commands from leaving machine-specific paths in version control.
 - Declared `RcppParallel` in `LinkingTo` and updated CI/Docker setup to rely on
   the package `configure` script for Makevars generation.
 
