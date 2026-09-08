@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">BMSC</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">26.09.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">26.09.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,6 +31,13 @@
 
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="26.09.1" id="bmsc-version-26091">BMSC version 26.09.1<a class="anchor" aria-label="anchor" href="#bmsc-version-26091"></a></h2>
+<div class="section level3">
+<h3 id="bugfixes-26-09-1">Bugfixes<a class="anchor" aria-label="anchor" href="#bugfixes-26-09-1"></a></h3>
+<ul><li>Added a <code>configure.win</code> script (identical to <code>configure</code>) so Windows source installations also regenerate <code>src/Makevars</code>; R does not fall back to <code>configure</code> on Windows when <code>configure.win</code> is missing, which previously caused <code>stan/version.hpp</code>, <code>tbb/tbb_stddef.h</code>, and <code>stan_meta_header.hpp</code> build failures on Windows.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="26.09.0" id="bmsc-version-26090">BMSC version 26.09.0<a class="anchor" aria-label="anchor" href="#bmsc-version-26090"></a></h2>
 <div class="section level3">

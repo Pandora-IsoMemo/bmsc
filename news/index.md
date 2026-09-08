@@ -1,5 +1,15 @@
 # Changelog
 
+## BMSC version 26.09.1
+
+### Bugfixes
+
+- Added a `configure.win` script (identical to `configure`) so Windows
+  source installations also regenerate `src/Makevars`; R does not fall
+  back to `configure` on Windows when `configure.win` is missing, which
+  previously caused `stan/version.hpp`, `tbb/tbb_stddef.h`, and
+  `stan_meta_header.hpp` build failures on Windows.
+
 ## BMSC version 26.09.0
 
 ### Bugfixes

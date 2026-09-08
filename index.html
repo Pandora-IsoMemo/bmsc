@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">BMSC</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">26.09.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">26.09.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,10 +77,15 @@
 <li>to re-generate <code>R/stanmodel.R</code> and the C++ Source Code in src use <code><a href="https://mc-stan.org/rstantools/reference/rstan_config.html" class="external-link">rstantools::rstan_config()</a></code>
 </li>
 <li>
-<code>src/Makevars</code> is generated automatically during source installation via the package <code>configure</code> script. For local development, you can run <code>./configure</code> or <code>./createMakeVars</code> manually before <code>devtools::check()</code> if needed. The generated file is ignored and should not be committed.</li>
+<code>src/Makevars</code> is generated automatically during source installation via the package <code>configure</code> script (<code>configure.win</code> on Windows). For local development, you can run <code>./configure</code> (or <code>configure.win</code> on Windows) or <code>./createMakeVars</code> manually before <code>devtools::check()</code> if needed. The generated file is ignored and should not be committed.</li>
 <li>After that you can install and compile the package e.g. <code>devtools::load_all()</code>
 </li>
 </ul>
+<div class="section level3">
+<h3 id="troubleshooting">Troubleshooting<a class="anchor" aria-label="anchor" href="#troubleshooting"></a>
+</h3>
+<p>If a source install fails with errors like <code>stan/version.hpp</code>, <code>tbb/tbb_stddef.h</code>, or <code>stan_meta_header.hpp</code> not found, <code>src/Makevars</code> was not regenerated for your system. Run <code>configure</code> (<code>configure.win</code> on Windows) manually from the package root, then reinstall/reload the package.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="notes-for-developers">Notes for developers<a class="anchor" aria-label="anchor" href="#notes-for-developers"></a>
